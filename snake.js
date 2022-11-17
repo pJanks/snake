@@ -66,9 +66,13 @@ const initialTableObject = {
 console.table(initialTableObject);
 
 const makeNetworkRequest = async (url, options = {}) => {
-  const response = await fetch(url, options);
-  const parsedResponse = await response.json();
-  return parsedResponse;
+  try {
+    const response = await fetch(url, options);
+    const parsedResponse = await response.json();
+    return parsedResponse;
+  } catch (err) {
+    console.log(`thre was an error: ${err}`);
+  }
 }
 
 const padNumber = number => String(number).padStart(2, '0');
@@ -81,17 +85,22 @@ const toggleModals = modal => {
 window.onload = () => populateHiScores();
 
 const populateHiScores = async () => {
-  hiScores = await makeNetworkRequest('/backend/get_scores.php');
-  for (let i = 0; i < 10; i++) {
-    const hiScore = hiScores[i] ?? {
-      name: 'EMPTY',
-      score: 0,
-      time: '00:00:00',
-      pills_eaten: 0,
-    };
-    const hiScoreRow = document.querySelector(`.table-data-${i}`);
-    hiScoreRow.innerText = '';
-    hiScoreRow.innerText = `${padNumber(i + 1)}. ${hiScore.name} - ${hiScore.score} - ${hiScore.time} - ${hiScore.pills_eaten} pills eaten`;
+  try {
+    hiScores = await makeNetworkRequest('/backend/get_scores.php');
+    for (let i = 0; i < 10; i++) {
+      const hiScore = hiScores[i] ?? {
+        name: 'EMPTY',
+        score: 0,
+        time: '00:00:00',
+        pills_eaten: 0,
+      };
+      const hiScoreRow = document.querySelector(`.table-data-${i}`);
+      hiScoreRow.innerText = '';
+      hiScoreRow.innerText = `${padNumber(i + 1)}. ${hiScore.name} - ${hiScore.score} - ${hiScore.time} - ${hiScore.pills_eaten} pills eaten`;
+    }
+  } catch (err) {
+    console.log(`thre was an error: ${err}`);
+    viewHiScoresButton.disabled = true;
   }
 }
 
@@ -186,7 +195,7 @@ const runGame = async () => {
     closeGameOverButton.focus();
     finalScore.innerText = score;
 
-    if (!hiScores[9] || score > Number(hiScores[9].score)) {
+    if (hiScores && !hiScores[9] || score > Number(hiScores[9].score)) {
       const name = prompt(`
         Congrats, You\'ve scored in the top 10!!
         Please enter an identifier:
@@ -295,13 +304,21 @@ const setVelocities = (e) => {
 }
 
 const insertScore = async (name) => {
-  const time = timer.innerText;
-  const options = {
-    method: 'POST',
-    body: JSON.stringify({ score, name, time, pillsEaten }),
-    'content-type': 'application/json',
-  };
-  await makeNetworkRequest('/backend/insert_scores.php', options);
+  if (viewHiScoresButton.disabled) {
+    console.log('db doesn\'t seem to be up');
+    return;
+  }
+  try {
+    const time = timer.innerText;
+    const options = {
+      method: 'POST',
+      body: JSON.stringify({ score, name, time, pillsEaten }),
+      'content-type': 'application/json',
+    };
+    await makeNetworkRequest('/backend/insert_scores.php', options);
+  } catch (err) {
+    console.log(`thre was an error: ${err}`);
+  }
 }
 
 drawSnake();
