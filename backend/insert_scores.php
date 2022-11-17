@@ -1,5 +1,5 @@
 <?php
-try {
+  try {
     require_once '../config.php';
     
     $date = new DateTime();
