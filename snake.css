@@ -217,7 +217,10 @@ body {
   position: absolute;
   top: 10vh;
   width: 100vw;
-  z-index: 1;
+}
+
+.mobile-modal {
+  padding: 0 20px;
 }
 
 .hi-scores-table {
