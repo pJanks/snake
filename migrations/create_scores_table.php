@@ -5,16 +5,14 @@
   $formattedDate = $date->format('m.d.y h:i:s A');
 
   try {
-    $sql = '
-      CREATE TABLE scores (
-        id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-        score INT(20) UNSIGNED,
-        name VARCHAR(255) NOT NULL,
-        time VARCHAR(30) NOT NULL,
-        pills_eaten INT(20) UNSIGNED,
-        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-      )
-    ';
+    $sql = 'CREATE TABLE scores (
+      id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+      score INT(20) UNSIGNED,
+      name VARCHAR(255) NOT NULL,
+      time VARCHAR(30) NOT NULL,
+      pills_eaten INT(20) UNSIGNED,
+      created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    )';
   
     $stmt = $pdo->prepare($sql);
     $stmt->execute();
