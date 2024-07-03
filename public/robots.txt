@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+Disallow: /backend/
+Disallow: /images/
+
+Sitemap: https://snake.mysite.dev/sitemap.xml

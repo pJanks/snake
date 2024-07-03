@@ -1,0 +1,276 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Mono:wght@300;600&display=swap');
+
+/***
+    The new CSS reset - version 1.7.2 (last updated 23.6.2022)
+    GitHub page: https://github.com/elad2412/the-new-css-reset
+***/
+
+/*
+    Remove all the styles of the "User-Agent-Stylesheet", except for the 'display' property
+    - The "symbol *" part is to solve Firefox SVG sprite bug
+ */
+ *:where(:not(html, iframe, canvas, img, svg, video):not(svg *, symbol *)) {
+  all: unset;
+  display: revert;
+}
+
+/* Preferred box-sizing value */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Reapply the pointer cursor for anchor tags */
+a,
+button {
+  cursor: pointer;
+  outline: 1px solid transparent;
+}
+
+a:focus,
+button:focus {
+  outline: 1px solid #00F;
+}
+
+/* Remove list styles (bullets/numbers) */
+ol,
+ul,
+menu {
+  list-style: none;
+}
+
+/* For images to not be able to exceed their container */
+img {
+  max-width: 100%;
+}
+
+/* removes spacing between cells in tables */
+table {
+  border-collapse: collapse;
+}
+
+/* Safari - solving issue when using user-select:none on the <body> text input doesn't working */
+/* input, textarea {
+  -webkit-user-select: auto;
+} */
+
+/* revert the 'white-space' property for textarea elements on Safari */
+textarea {
+  white-space: revert;
+}
+
+/* minimum style to allow to style meter element */
+meter {
+  -webkit-appearance: revert;
+  appearance: revert;
+}
+
+/* reset default text opacity of input placeholder */
+::placeholder {
+  color: unset;
+}
+
+/* fix the feature of 'hidden' attribute.
+ display:revert; revert to element instead of attribute */
+:where([hidden]) {
+  display: none;
+}
+
+/* revert for bug in Chromium browsers
+ - fix for the content editable attribute will work properly.
+ - webkit-user-select: auto; added for Safari in case of using user-select:none on wrapper element*/
+:where([contenteditable]:not([contenteditable="false"])) {
+  -moz-user-modify: read-write;
+  -webkit-user-modify: read-write;
+  overflow-wrap: break-word;
+  /* -webkit-line-break: after-white-space;
+  -webkit-user-select: auto; */
+}
+
+/* apply back the draggable feature - exist only in Chromium and Safari */
+:where([draggable="true"]) {
+  -webkit-user-drag: element;
+}
+
+* {
+  overscroll-behavior: none;
+}
+
+body {
+  background-color: #000;
+  font-family: 'Noto Sans Mono', monospace;
+  overflow-x: hidden;
+  width: 100%;
+}
+
+.main-header {
+  background-color: #000;
+  border-bottom: 1px solid #28BD00;
+  padding: 10px 15px;
+  position: absolute;
+  width: 100%;
+}
+
+.created-by {
+  color: #28BD00;
+}
+
+.link-to-main-page {
+  font-size: 90%;
+}
+
+.link-to-main-page:hover {
+  text-decoration: underline;
+}
+
+.app-wrapper {
+  align-items: center;
+  display: flex;
+  font-family: 'Noto Sans Mono', monospace;
+  justify-content: center;
+  min-height: 100vh;
+  width: 100%;
+}
+
+/* snake styles */
+.snake-game-wrapper {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: 90vh;
+  margin-top: 5vh;
+  padding: 0 0 10px 0;
+}
+
+.snake-heading-and-timer-wrapper {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10vh;
+  width: 600px;
+}
+
+.snake-heading {
+  border: 1px solid #28BD00;
+  border-bottom: none;
+  color: #28BD00;
+  padding: 10px 15px;
+}
+
+.snake-game-canvas {
+  border: 1px solid #28BD00 ;
+  position: relative;
+}
+
+.snake-game-canvas:focus {
+  outline: none;
+}
+
+.timer {
+  color: #28BD00;
+  font-size: 110%;
+}
+
+.game-over-text {
+  font-size: 300%;
+}
+
+.user-score-text {
+  margin-bottom: 40px;
+}
+
+.game-instructions-paragraph {
+  text-align: justify;
+}
+
+.user-score-text {
+  font-size: 150%;
+}
+
+.snake-game-buttons-wrapper {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  padding: 30px 0;
+  width: 600px;
+}
+
+.game-button {
+  background-color: #28BD00;
+  border: 6px double #000;
+  border-radius: 8px;
+  color: #000;
+  font-size: 130%;
+  font-weight: 300;
+  padding: 5px;
+  text-align: center;
+  width: 30%;
+}
+
+.game-button:hover {
+  background-color: #1F8E02;
+}
+
+.game-button:active {
+  background-color: #2FDF00;
+}
+
+.game-button:disabled {
+  background-color: #666;
+}
+
+.close-instructions-button {
+  margin-top: 30px;
+}
+
+.modal {
+  align-items: center;
+  background-color: #000;
+  color: #28BD00;
+  display: flex;
+  flex-direction: column;
+  min-height: 90vh;
+  justify-content: center;
+  left: 0;
+  padding: 0 100px 20px 100px;
+  position: absolute;
+  top: 10vh;
+  width: 100vw;
+}
+
+.mobile-modal {
+  padding: 0 20px;
+}
+
+.hi-scores-table {
+  color: #28BD00;
+  margin-bottom: 40px;
+}
+
+.hi-scores-table-header {
+  font-size: 150%;
+  font-weight: 600;
+  padding-bottom: 20px;
+  text-align: center;
+  text-decoration: underline;
+}
+
+.hi-scores-table-data {
+  border: 2px solid #28BD00;
+  padding: 10px 100px 10px 25px;
+}
+
+.link-to-github-wrapper {
+  color: #28BD00;
+  margin-top: 30px;
+}
+
+.link-to-github {
+  border-bottom: 1px solid #28BD00;
+}
+
+.hidden {
+  display: none;
+}
