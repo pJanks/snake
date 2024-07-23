@@ -22,6 +22,6 @@
     unset($pdo);
   } catch(PDOException $e) {
     $errorMessage = $formattedDate . ' ERROR GETTING scores TABLE: ' . $e->getMessage() . ' line: ' . $e->getLine() . "\n";
-    file_put_contents('logs/error.log', $errorMessage, FILE_APPEND);
+    file_put_contents('../logs/error.log', $errorMessage, FILE_APPEND);
     echo '<h1 style="color: #F00; font-size: 240%; font-weight: bold;">ERROR</h1>';
   }
